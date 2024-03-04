@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 유틸리티 */
+.ir {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  overflow: clip;
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+  white-space: nowrap;
+}
+
+body {
+  height: 100vh;
+}
+
+/* Tailwind적용 시 유튜브 css에게 밀리는 현상 발생 */
+.digital-literacy-left-border {
+  border-left: 0.5rem !important;
+  border-color: #3b28cc !important;
+  border-style: solid !important;
+}
+
+.digital-literacy-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
