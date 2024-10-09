@@ -1,8 +1,6 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const tailwindcss = require("tailwindcss");
-const autoprefixer = require("autoprefixer");
 
 const getHtmlPlugins = (chunks) => {
   return chunks.map(
@@ -20,6 +18,10 @@ module.exports = {
     background: path.resolve("./src/background/background.ts"),
     contentScript: path.resolve("./src/contentScript/index.tsx"),
   },
+  output: {
+    filename: "[name].js",
+    clean: true,
+  },
   module: {
     rules: [
       {
@@ -28,38 +30,12 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                ident: "postcss",
-                plugins: [tailwindcss, autoprefixer],
-              },
-            },
-          },
-        ],
+        use: ["postcss-loader"],
         test: /\.css$/i,
       },
       {
-        type: "asset/resource",
-        use: ["file-loader"],
         test: /\.(png|jpg|jpeg|gif|woff|woff2|tff|eot|svg)i$/,
-      },
-      {
-        test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
-            loader: "url-loader",
-            options: {
-              limit: 4000,
-              fallback: "file-loader",
-              name: "images/[name].[ext]",
-            },
-          },
-        ],
+        type: "asset/inline",
       },
     ],
   },
@@ -76,9 +52,6 @@ module.exports = {
     ...getHtmlPlugins(["popup"]),
   ],
   resolve: { extensions: [".tsx", ".ts", ".js"] },
-  output: {
-    filename: "[name].js",
-  },
   optimization: {
     splitChunks: {
       chunks(chunk) {
