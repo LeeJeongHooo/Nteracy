@@ -23,7 +23,7 @@ module.exports = {
   entry: {
     popup: path.resolve("./src/popup/Popup.tsx"),
     background: path.resolve("./src/background/background.ts"),
-    content: path.resolve("./src/contentScript/index.tsx"),
+    content: path.resolve("./src/content/index.tsx"),
   },
   output: {
     filename: "[name].js",
