@@ -1,8 +1,10 @@
+if (module.hot) {
+  require("@cooby/crx-load-script-webpack-plugin/lib/loadScript");
+}
+
 chrome.runtime.onInstalled.addListener(() => {
   console.log("BackGround접속");
 });
-
-chrome.bookmarks.onCreated.addListener(() => {});
 
 enum AccountStatus {
   SYNC = "SYNC",

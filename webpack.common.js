@@ -1,6 +1,12 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ReactRefreshTypeScript = require("react-refresh-typescript");
+const ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const CrxLoadScriptWebpackPlugin = require("@cooby/crx-load-script-webpack-plugin");
+const { webpack } = require("webpack");
+
+const isDev = process.env.NODE !== "production";
 
 const getHtmlPlugins = (chunks) => {
   return chunks.map(
@@ -13,10 +19,11 @@ const getHtmlPlugins = (chunks) => {
 };
 
 module.exports = {
+  resolve: { extensions: [".tsx", ".ts", ".js"] },
   entry: {
     popup: path.resolve("./src/popup/Popup.tsx"),
     background: path.resolve("./src/background/background.ts"),
-    contentScript: path.resolve("./src/contentScript/index.tsx"),
+    content: path.resolve("./src/contentScript/index.tsx"),
   },
   output: {
     filename: "[name].js",
@@ -25,12 +32,20 @@ module.exports = {
   module: {
     rules: [
       {
-        use: "ts-loader",
+        use: {
+          loader: "ts-loader",
+          options: {
+            transpileOnly: isDev,
+            getCustomTransformers: () => ({
+              before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
+            }),
+          },
+        },
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
       },
       {
-        use: ["postcss-loader"],
+        use: ["style-loader", "css-loader", "postcss-loader"],
         test: /\.css$/i,
       },
       {
@@ -40,6 +55,8 @@ module.exports = {
     ],
   },
   plugins: [
+    isDev && new ReactRefreshPlugin({ overlay: false }),
+    isDev && new CrxLoadScriptWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         { from: path.resolve("src/static"), to: path.resolve("dist") },
@@ -50,13 +67,5 @@ module.exports = {
       ],
     }),
     ...getHtmlPlugins(["popup"]),
-  ],
-  resolve: { extensions: [".tsx", ".ts", ".js"] },
-  optimization: {
-    splitChunks: {
-      chunks(chunk) {
-        return chunk.name !== "contentScript";
-      },
-    },
-  },
+  ].filter(Boolean),
 };
