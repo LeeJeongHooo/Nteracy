@@ -4,16 +4,28 @@
   "manifest_version": 3,
   "version": "1.0.0",
   "action": {
-    "default_title": "Click Me",
+    "default_title": "디지털 리터러시",
     "default_popup": "popup.html"
   },
-  "permissions": ["bookmarks", "identity", "identity.email"],
-  "host_permissions": ["*://*/*"],
+  "permissions": [
+    "identity",
+    "identity.email",
+    "tabs",
+    "activeTab",
+    "scripting"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["*.hot-update.json"],
+      "matches": ["https://www.youtube.com/*"]
+    }
+  ],
+  "host_permissions": ["https://www.youtube.com/*"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
-    { "matches": ["https://www.youtube.com/*"], "js": ["contentScript.js"] }
+    { "matches": ["https://www.youtube.com/*"], "js": ["content.js"] }
   ],
   "externally_connectable": {
     "matches": ["https://www.youtube.com/*"]
