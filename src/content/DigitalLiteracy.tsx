@@ -1,17 +1,14 @@
-// 내부 라이브러리
-import React, { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getYoutubeParams } from "./searchParams";
-// api
 import { instance } from "../api/axiosBase";
-
-// 컴포넌트
-import Header from "./components/Header/Header";
 import Container from "./components/common/Container/Container";
 import InformationCard from "./components/InformationCard/InformationCard";
-import Button from "./components/common/Button/Button";
+
 import ProgressBar from "./components/common/ProgressBar/ProgressBar";
 import InputRadio from "./components/common/InputRadio/InputRadio";
 import MyReponsesList from "./MyReponsesList";
+import { Button } from "./components/common/button";
+import { TopHeader } from "./components/header";
 
 export interface ResponseType {
   y: number;
@@ -29,8 +26,18 @@ export interface YoutubeParams {
 
 const DigitalLiteracy = () => {
   // 정보창 열기 닫기 버튼
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenHistory, setIsOpenHistory] = useState(false);
+  // 정보창 열기
+  const [isOpenInformation, setIsOpenInformation] = useState<boolean>(false);
+  const [isOpenHistory, setIsOpenHistory] = useState<boolean>(false);
+
+  const handleToggleInformation = useCallback(() => {
+    setIsOpenInformation((prevIsOpen) => !prevIsOpen);
+  }, []);
+
+  const handleToggleHistory = useCallback(() => {
+    setIsOpenHistory((prevIsOpen) => !prevIsOpen);
+  }, []);
+
   const [isReliable, setIsReliable] = useState("");
   const [isFact, setIsFact] = useState("");
 
@@ -122,16 +129,6 @@ const DigitalLiteracy = () => {
     }
   };
 
-  // Information 창 열기
-  const informationOpenHandler = () => {
-    setIsOpen(!isOpen);
-  };
-
-  // History 창 열기
-  const historyOpenHandler = (isopen: boolean) => {
-    setIsOpenHistory(isopen);
-  };
-
   // 신뢰할 만한 출처 답변 Radio 헨들러
   const reliableChangeHandler = (val: any) => {
     setIsReliable(val);
@@ -147,14 +144,13 @@ const DigitalLiteracy = () => {
 
   return (
     <Container>
-      <Header
-        isOpen={isOpen}
-        isOpenHistory={isOpenHistory}
-        onClick={informationOpenHandler}
-        openHistory={historyOpenHandler}
+      <TopHeader
+        isOpen={isOpenInformation}
+        onToggleHistory={handleToggleHistory}
+        onToggleInformation={handleToggleInformation}
       />
 
-      {isOpen && !isOpenHistory && (
+      {isOpenInformation && !isOpenHistory && (
         <>
           <InformationCard title="기본 정보">
             <p className="text-base">
@@ -263,7 +259,7 @@ const DigitalLiteracy = () => {
           </InformationCard>
         </>
       )}
-      {isOpen && isOpenHistory && <MyReponsesList />}
+      {isOpenInformation && isOpenHistory && <MyReponsesList />}
     </Container>
   );
 };
