@@ -1,6 +1,5 @@
-import React from "react";
 import ReactDom from "react-dom/client";
-import "../assets/styles/tailwind.css";
+import "../assets/styles/main.css";
 
 import PopupContainer from "./components/common/PopupContainer";
 

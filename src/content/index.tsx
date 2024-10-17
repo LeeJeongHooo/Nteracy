@@ -1,6 +1,5 @@
-import React from "react";
 import { createRoot } from "react-dom/client";
-import "../assets/styles/tailwind.css";
+import "../assets/styles/main.css";
 import ContentScript from "./ContentScript";
 __webpack_public_path__ = chrome.runtime.getURL("");
 
