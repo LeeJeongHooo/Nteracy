@@ -19,7 +19,16 @@ const getHtmlPlugins = (chunks) => {
 };
 
 module.exports = {
-  resolve: { extensions: [".tsx", ".ts", ".js"] },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+    alias: {
+      "@api": path.resolve(__dirname, "./src/api"),
+      "@assets": path.resolve(__dirname, "./src/assets"),
+      "@background": path.resolve(__dirname, "./src/background"),
+      "@content": path.resolve(__dirname, "./src/content"),
+      "@popup": path.resolve(__dirname, "./src/popup"),
+    },
+  },
   entry: {
     popup: path.resolve("./src/popup/Popup.tsx"),
     background: path.resolve("./src/background/background.ts"),
