@@ -1,7 +1,7 @@
-import { forwardRef, HTMLAttributes, useId } from "react";
+import { forwardRef, ComponentPropsWithoutRef, useId } from "react";
 import { AccordionItemContext, useAccordionContext } from "./context";
 
-export interface AccordionItemProps extends HTMLAttributes<HTMLDivElement> {
+export interface AccordionItemProps extends ComponentPropsWithoutRef<"div"> {
   value: string;
 }
 

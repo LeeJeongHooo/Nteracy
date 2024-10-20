@@ -1,8 +1,8 @@
-import { forwardRef, HTMLAttributes } from "react";
+import { forwardRef, ComponentPropsWithoutRef } from "react";
 import { useAccordionContext, useAccordionItemContext } from "./context";
 
 export interface AccordionTriggerProps
-  extends HTMLAttributes<HTMLButtonElement> {}
+  extends ComponentPropsWithoutRef<"button"> {}
 
 export const AccordionTrigger = forwardRef<
   HTMLButtonElement,

@@ -1,7 +1,6 @@
-import { forwardRef, HTMLAttributes } from "react";
+import { forwardRef, ComponentPropsWithoutRef } from "react";
 
-export interface AccordionHeaderProps
-  extends HTMLAttributes<HTMLHeadingElement> {}
+export interface AccordionHeaderProps extends ComponentPropsWithoutRef<"h3"> {}
 
 export const AccordionHeader = forwardRef<
   HTMLHeadingElement,
