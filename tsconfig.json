@@ -9,6 +9,7 @@
     "paths": {
       "@api/*": ["api/*"],
       "@assets/*": ["assets/*"],
+      "@utils/*": ["utils/*"],
       "@background/*": ["background/*"],
       "@content/*": ["content/*"],
       "@popup/*": ["popup/*"]
