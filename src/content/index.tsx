@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
-import "../assets/styles/main.css";
-import ContentScript from "./ContentScript";
+import App from "./App";
+import "@assets/styles/main.css";
+
 __webpack_public_path__ = chrome.runtime.getURL("");
 
 let oldHref = "";
@@ -47,7 +48,7 @@ const init = async () => {
   }
 
   const root = createRoot(appContainer);
-  root.render(<ContentScript />);
+  root.render(<App />);
 };
 
 export const waitForElement = (selector: string) => {
