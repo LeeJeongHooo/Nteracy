@@ -8,24 +8,24 @@ import { AccordionTrigger } from "./Trigger";
 export interface AccordionProps {
   value?: string[];
   defaultValue?: string[];
-  onValueChange?: (value: string[]) => void;
+  onChangeValue?: (value: string[]) => void;
 }
 
 export const AccordionRoot = (props: PropsWithChildren<AccordionProps>) => {
   const {
     value: valueProp,
     defaultValue: defaultValueProp,
-    onValueChange: onChangeProp,
+    onChangeValue: onChangeValueProp,
     ...restProps
   } = props;
 
-  const [uncontrolledvalue, setUncontrolledvalueValue] = useState(
+  const [uncontrolledValue, setuncontrolledValue] = useState(
     () => defaultValueProp || []
   );
 
   const isControlled = valueProp !== undefined;
 
-  const value = isControlled ? valueProp : uncontrolledvalue;
+  const value = isControlled ? valueProp : uncontrolledValue;
 
   const handleChangeValue: React.Dispatch<React.SetStateAction<string[]>> =
     useCallback(
@@ -34,13 +34,13 @@ export const AccordionRoot = (props: PropsWithChildren<AccordionProps>) => {
           typeof nextValue === "function" ? nextValue(valueProp) : nextValue;
         if (isControlled) {
           if (value !== valueProp) {
-            onChangeProp?.(value);
+            onChangeValueProp?.(value);
           }
         } else {
-          setUncontrolledvalueValue(nextValue);
+          setuncontrolledValue(nextValue);
         }
       },
-      [isControlled, valueProp, onChangeProp]
+      [isControlled, valueProp, onChangeValueProp]
     );
 
   const handleItemOpen = useCallback(

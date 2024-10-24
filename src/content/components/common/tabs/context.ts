@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 interface TabsContextValues {
   baseId: string;
   value: string;
-  onValueChange: (value: string) => void;
+  onChangeValue: (value: string) => void;
 }
 
 export const TabsContext = createContext<TabsContextValues | undefined>(

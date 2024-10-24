@@ -1,5 +1,6 @@
 import { ComponentProps, forwardRef } from "react";
 import { useTabsContext } from "./context";
+import { cn } from "@utils/cn";
 
 export interface TabsTriggerProps extends ComponentProps<"button"> {
   value: string;
@@ -7,8 +8,13 @@ export interface TabsTriggerProps extends ComponentProps<"button"> {
 
 export const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
   (props, ref) => {
-    const { value: valueProp, disabled = false, ...restProps } = props;
-    const { value, onValueChange, baseId } = useTabsContext();
+    const {
+      value: valueProp,
+      disabled = false,
+      className,
+      ...restProps
+    } = props;
+    const { value, onChangeValue, baseId } = useTabsContext();
 
     const isSelected = valueProp === value;
     const triggerId = `${baseId}-trigger`;
@@ -16,11 +22,15 @@ export const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
 
     return (
       <button
-        className={`${isSelected ? "border-red-50" : "border-orange-200"}`}
+        className={cn(
+          "px-3 h-8 rounded mr-2 transition-colors duration-300",
+          isSelected && " bg-mainBlue text-white",
+          className
+        )}
         ref={ref}
         type="button"
         role="tab"
-        onClick={() => onValueChange(valueProp)}
+        onClick={() => onChangeValue(valueProp)}
         id={triggerId}
         aria-selected={isSelected}
         aria-controls={contentId}

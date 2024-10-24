@@ -9,7 +9,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className="flex items-center justify-center text-[1.4rem] font-normal rounded-[0.8rem] px-3.5 py-2.5 transition-colors bg-mainBlue text-white cursor-pointer disabled:pointer-events-none disabled:bg-gray disabled:text-black "
+        className="flex items-center justify-center text-base font-medium rounded px-3.5 py-2.5 transition-colors bg-mainBlue text-white cursor-pointer disabled:pointer-events-none disabled:bg-gray disabled:text-black"
         disabled={disabled}
         {...restProps}
       >

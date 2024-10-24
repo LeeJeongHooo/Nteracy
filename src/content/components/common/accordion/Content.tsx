@@ -17,7 +17,7 @@ export const AccordionContent = forwardRef<
       aria-labelledby={triggerId}
       {...props}
       className={`${
-        open ? "opacity-100 max-h-6" : "max-h-0 opacity-0"
+        open ? "opacity-100 max-h-[1024px]" : "max-h-0 opacity-0"
       } transition-all duration-300`}
     />
   );

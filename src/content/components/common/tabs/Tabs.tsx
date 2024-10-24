@@ -13,24 +13,24 @@ import { TabsList } from "./List";
 export interface TabsProps extends ComponentPropsWithoutRef<"div"> {
   value?: string;
   defaultValue?: string;
-  onValueChange?: (value: string) => void;
+  onChangeValue?: (value: string) => void;
 }
 
 export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
   const {
     value: valueProp,
     defaultValue: defaultValueProp,
-    onValueChange: onChangeProp,
+    onChangeValue: onChangeProp,
     ...restProps
   } = props;
 
-  const [uncontrolledvalue, setUncontrolledvalueValue] = useState(
+  const [uncontrolledValue, setUncontrolledValue] = useState(
     () => defaultValueProp || ""
   );
 
   const isControlled = valueProp !== undefined;
 
-  const value = isControlled ? valueProp : uncontrolledvalue;
+  const value = isControlled ? valueProp : uncontrolledValue;
 
   const handleChangeValue: React.Dispatch<React.SetStateAction<string>> =
     useCallback(
@@ -42,7 +42,7 @@ export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
             onChangeProp?.(value);
           }
         } else {
-          setUncontrolledvalueValue(nextValue);
+          setUncontrolledValue(nextValue);
         }
       },
       [isControlled, valueProp, onChangeProp]
@@ -52,9 +52,9 @@ export const TabsRoot = forwardRef<HTMLDivElement, TabsProps>((props, ref) => {
 
   return (
     <TabsContext.Provider
-      value={{ value, baseId, onValueChange: handleChangeValue }}
+      value={{ value, baseId, onChangeValue: handleChangeValue }}
     >
-      <div ref={ref} {...restProps} />
+      <div className="overflow-hidden" ref={ref} {...restProps} />
     </TabsContext.Provider>
   );
 });
