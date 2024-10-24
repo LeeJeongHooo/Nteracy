@@ -24,7 +24,8 @@ export const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
       <button
         className={cn(
           "px-3 h-8 rounded mr-2 transition-colors duration-300",
-          isSelected && " bg-mainBlue text-white",
+          !isSelected && "hover:bg-grey100",
+          isSelected && "bg-primary300 text-white",
           className
         )}
         ref={ref}
