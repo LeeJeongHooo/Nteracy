@@ -4,12 +4,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        mainBlue: "#3B28CC",
-        lightBlue: "#D7DBFF",
-        darkBlue: "#322E9C",
-        lightWhite: "#F4EEC7",
-        gray: "#D7D7D7",
-        dark: "#1E1E1E",
+        primary100: "#D7DBFF",
+        primary300: "#3B28CC",
+        primary500: "#322E9C",
+        white: "#FFFFFF",
+        white100: "#F4EEC7",
+        grey: "#D7D7D7",
+        grey100: "#A4A7C6",
+        black: "#000000",
+        black100: "#1E1E1E",
       },
       fontSize: {
         xs: "1.0rem",
