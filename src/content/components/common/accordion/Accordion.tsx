@@ -31,7 +31,9 @@ export const AccordionRoot = (props: PropsWithChildren<AccordionProps>) => {
     useCallback(
       (nextValue) => {
         const value =
-          typeof nextValue === "function" ? nextValue(valueProp) : nextValue;
+          typeof nextValue === "function"
+            ? nextValue(valueProp as string[])
+            : nextValue;
         if (isControlled) {
           if (value !== valueProp) {
             onChangeValueProp?.(value);
