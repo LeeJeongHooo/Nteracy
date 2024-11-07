@@ -10,7 +10,7 @@ export const TabsList = forwardRef<HTMLDivElement, TabListProps>(
       <div
         ref={ref}
         role="tablist"
-        className={cn("mt-3 text-base font-medium", className)}
+        className={cn("text-base font-medium", className)}
         {...restProps}
       />
     );

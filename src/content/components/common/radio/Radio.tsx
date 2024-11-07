@@ -10,8 +10,6 @@ export interface RadioProps extends ComponentPropsWithoutRef<"input"> {
 export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const {
     value: valueProp,
-    checked: checkedProp,
-    defaultChecked,
     disabled,
     children,
     className,
@@ -25,14 +23,16 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   return (
     <label
       className={cn(
-        "inline-flex mr-2 last:mr-0 items-center justify-center text-base font-medium border-[1.6px] border-solid border-primary300 rounded px-3.5 py-2.5 transition-colors duration-300 hover:bg-grey100",
-        checked && "bg-primary300 text-white",
+        "inline-flex mr-2 last:mr-0 items-center justify-center text-base font-medium border-[1.6px] border-solid border-primary300 rounded px-3.5 py-[0.85rem] transition-colors duration-300",
+        checked && "bg-primary300 text-white ",
+        isDisabled && "bg-grey text-black border-0",
+        !isDisabled && !checked && "hover:bg-grey100",
         className
       )}
     >
       {children}
       <input
-        className="ir"
+        className="sr-only"
         ref={ref}
         name={valueContext.name}
         type="radio"
@@ -43,7 +43,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         aria-checked={checked}
         aria-disabled={isDisabled}
         aria-hidden
-        onClick={() => {
+        onChange={() => {
           if (!checked) valueContext.onChangeValue(valueProp);
         }}
         {...restProps}
