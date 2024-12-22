@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ReactRefreshTypeScript = require("react-refresh-typescript");
 const ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const CrxLoadScriptWebpackPlugin = require("@cooby/crx-load-script-webpack-plugin");
-const { ProvidePlugin } = require("webpack");
 
 const isDev = process.env.NODE !== "production";
 
@@ -76,7 +75,6 @@ module.exports = {
         },
       ],
     }),
-    new ProvidePlugin({ React: "react" }),
     ...getHtmlPlugins(["popup"]),
   ].filter(Boolean),
 };
