@@ -54,6 +54,18 @@ const config: StorybookConfig = {
     },
   }),
   webpackFinal: async (config) => {
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        "@api": path.resolve(__dirname, "../src/api"),
+        "@assets": path.resolve(__dirname, "../src/assets"),
+        "@utils": path.resolve(__dirname, "../src/utils"),
+        "@background": path.resolve(__dirname, "../src/background"),
+        "@content": path.resolve(__dirname, "../src/content"),
+        "@popup": path.resolve(__dirname, "../src/popup"),
+      };
+    }
+
     return config;
   },
 };

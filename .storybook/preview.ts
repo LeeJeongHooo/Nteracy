@@ -9,7 +9,9 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    layout: "fullscreen",
   },
+  tags: ["autodocs"],
 };
 
 export default preview;
