@@ -10,7 +10,9 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "author": "LeeJoengHo",
+  "author": {
+    "name": "LeeJeongHo"
+  },
   "license": "ISC",
   "dependencies": {
     "@tanstack/react-query": "^5.60.5",
@@ -36,6 +38,7 @@
     "@types/react-dom": "^18.2.7",
     "@types/webpack-env": "^1.18.5",
     "autoprefixer": "^10.4.14",
+    "chromatic": "^11.20.2",
     "clsx": "^2.1.1",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^7.1.2",
