@@ -10,9 +10,6 @@ on:
 jobs:
   storybook-deployment:
     runs-on: ubuntu-latest
-    outputs:
-      status: ${{ job.status }}
-
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -28,6 +25,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: deploy to chromatic
