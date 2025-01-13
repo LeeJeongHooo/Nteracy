@@ -1,25 +1,23 @@
 import ReactDom from "react-dom/client";
-import "../assets/styles/main.css";
+import "@assets/styles/main.css";
+import Logo from "@assets/images/logo.png";
+import LeftArrow from "@assets/icons/left-arrow.svg";
 
-import PopupContainer from "./components/common/PopupContainer";
-
-const Popup = (
-  <PopupContainer>
-    <div className="rounded-lg overflow-hidden shadow-[0_3px_8px_rgb(0,0,0,0.2)]">
-      <h3 className="bg-darkBlue text-white p-2">
-        <span>카테고리</span>
-      </h3>
-      <div className="flex flex-col gap-2 p-2">
-        <p>카테고리: 뉴스/정치</p>
-        <p>게시자: BBC News</p>
-        <p>게시일: 2023.08.11 금요일</p>
-      </div>
+const Popup = () => {
+  return (
+    <div className="relative top-0 right-0 w-[254px] overflow-hidden bg-primary300 p-2 flex flex-col items-center text-white font-medium">
+      <img src={Logo} alt="logo" className="w-[100px] h-[35px]" />
+      <p className="mb-2">Youtube에 접속해서 서비스를 이용해보세요</p>
+      <button
+        className="flex items-center"
+        onClick={() => chrome.tabs.create({ url: "https://www.youtube.com/" })}
+      >
+        <span>Youtube로 이동</span>
+        <img className="w-3 h-3" src={LeftArrow} alt="left-arrow" />
+      </button>
     </div>
-  </PopupContainer>
-);
+  );
+};
 
-const container = document.createElement("div");
-document.body.appendChild(container);
-
-const root = ReactDom.createRoot(container);
-root.render(Popup);
+const root = ReactDom.createRoot(document.body);
+root.render(<Popup />);
