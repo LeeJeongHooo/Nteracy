@@ -1,5 +1,6 @@
 import { forwardRef, ComponentPropsWithoutRef } from "react";
 import { useAccordionItemContext } from "./context";
+import { cn } from "@utils/cn";
 
 export interface AccordionContentProps
   extends ComponentPropsWithoutRef<"div"> {}
@@ -15,10 +16,11 @@ export const AccordionContent = forwardRef<
       ref={ref}
       role="region"
       aria-labelledby={triggerId}
-      {...props}
-      className={`${
+      className={cn(
+        "transition-all duration-300",
         open ? "opacity-100 max-h-[1024px]" : "max-h-0 opacity-0"
-      } transition-all duration-300`}
+      )}
+      {...props}
     />
   );
 });
