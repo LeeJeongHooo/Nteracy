@@ -5,7 +5,7 @@ const meta: Meta<typeof Button> = {
   title: "Component/Button",
   component: Button,
   parameters: {
-    layout: "fullscreen",
+    layout: "centered",
   },
 };
 
