@@ -23,10 +23,12 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   return (
     <label
       className={cn(
-        "inline-flex mr-2 last:mr-0 items-center justify-center text-base font-medium border-[1.6px] border-solid border-primary300 rounded px-3.5 py-[0.85rem] transition-colors duration-300",
-        checked && "bg-primary300 text-white ",
-        isDisabled && "bg-grey text-black border-0",
-        !isDisabled && !checked && "hover:bg-grey100",
+        "inline-flex mr-2 last:mr-0 items-center justify-center text-base font-medium border-[1.6px] border-solid border-grey400 rounded px-3.5 py-[0.85rem] transition-colors duration-300",
+        checked && "bg-primary300 text-white",
+        isDisabled && "bg-grey400 text-grey500 border-0",
+        !isDisabled &&
+          !checked &&
+          "hover:border-none hover:bg-grey600 hover:text-white",
         className
       )}
     >
