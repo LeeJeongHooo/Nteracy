@@ -5,18 +5,21 @@ const meta: Meta<typeof Accordion> = {
   title: "Component/Accordion",
   component: Accordion,
   parameters: {
-    layout: "fullscreen",
+    layout: "centered",
   },
   argTypes: {
     defaultValue: {
-      description: "아코디언 처음에 열려있는지 닫혀있는 지 확인합니다",
+      description:
+        "자식에서 상태를 관리하는 경우 초기 렌더링 과정에서만 아코디언이 열려있는지 닫혀있는 지 확인합니다.",
     },
     value: {
-      description: "부모에서 상태를 관리하는 경우 Props로 내려받을 수 있습니다",
+      description:
+        "부모에서 상태를 관리하는 경우 Props로 내려받을 수 있습니다.",
+      control: false,
     },
     onChangeValue: {
       description:
-        "부모에서 상태를 관리하는 경우 onChangeValue를 활용하여 상태를 관리할 수 있습니다",
+        "부모에서 상태를 관리하는 경우 onChangeValue를 활용하여 상태를 관리할 수 있습니다.",
     },
   },
 };
@@ -57,6 +60,9 @@ export const Close: Story = {
 const MULTI_VALUE = ["Example1", "Example2"];
 
 export const Multiple: Story = {
+  argTypes: {
+    value: { options: MULTI_VALUE, control: "check" },
+  },
   render: (args) => {
     return (
       <Accordion {...args}>
