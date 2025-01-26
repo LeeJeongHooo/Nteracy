@@ -28,7 +28,10 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
     const percent = isNumber(value) ? getPercent(value, max) : undefined;
     return (
       <div
-        className={cn("relative overflow-hidden bg-gray-200", className)}
+        className={cn(
+          "relative overflow-hidden bg-gray-200 h-9 rounded",
+          className
+        )}
         aria-valuemax={max}
         aria-valuemin={0}
         aria-valuetext={valueLabel}
