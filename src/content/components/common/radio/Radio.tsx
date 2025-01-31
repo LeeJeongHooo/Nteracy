@@ -25,10 +25,10 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
       className={cn(
         "inline-flex mr-2 last:mr-0 items-center justify-center text-base font-medium border-[1.6px] border-solid border-grey400 rounded px-3.5 py-[0.85rem] transition-colors duration-300",
         checked && "bg-primary300 text-white",
-        isDisabled && "bg-grey400 text-grey500 border-0",
+        isDisabled && "bg-grey400 text-grey500 border-transparent",
         !isDisabled &&
           !checked &&
-          "hover:border-none hover:bg-grey600 hover:text-white",
+          "hover:border-transparent hover:bg-grey600 hover:text-white",
         className
       )}
     >
@@ -45,6 +45,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         aria-checked={checked}
         aria-disabled={isDisabled}
         aria-hidden
+        tabIndex={-1}
         onChange={() => {
           if (!checked) valueContext.onChangeValue(valueProp);
         }}
