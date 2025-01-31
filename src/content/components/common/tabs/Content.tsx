@@ -12,8 +12,8 @@ export const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
     const { value, baseId } = useTabsContext();
 
     const isSelected = valueProp === value;
-    const triggerId = `${baseId}-trigger`;
-    const contentId = `${baseId}-content`;
+    const triggerId = `${baseId}-${valueProp}trigger`;
+    const contentId = `${baseId}-${valueProp}content`;
 
     return isSelected ? (
       <div

@@ -17,8 +17,8 @@ export const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
     const { value, onChangeValue, baseId } = useTabsContext();
 
     const isSelected = valueProp === value;
-    const triggerId = `${baseId}-trigger`;
-    const contentId = `${baseId}-content`;
+    const triggerId = `${baseId}-${valueProp}trigger`;
+    const contentId = `${baseId}-${valueProp}content`;
 
     return (
       <button
