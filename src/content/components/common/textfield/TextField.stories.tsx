@@ -1,5 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { TextField } from "./TextField";
+import { Fragment } from "react/jsx-runtime";
+import { Label } from "../label";
 
 const meta: Meta<typeof TextField> = {
   title: "Component/TextField",
@@ -58,4 +60,16 @@ export const WithLengthCounter: Story = {
 
 export const WithLengthCounterAndMessage: Story = {
   args: { message: "Hint Text", maxLength: 10 },
+};
+
+export const WithLabelComponent: Story = {
+  args: {
+    ...Primary.args,
+  },
+  render: (args) => (
+    <Fragment>
+      <Label>label</Label>
+      <TextField {...args} />
+    </Fragment>
+  ),
 };
