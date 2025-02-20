@@ -29,14 +29,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "content_scripts": [
-    { "matches": ["https://www.youtube.com/*"], "js": ["content.js"] }
-  ],
   "externally_connectable": {
     "matches": ["https://www.youtube.com/*"]
-  },
-  "oauth2": {
-    "client_id": "1062353051353-03a84q35hjrkoav78767geekte4i5rje.apps.googleusercontent.com",
-    "scopes": []
   }
 }
