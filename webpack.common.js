@@ -1,11 +1,6 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ReactRefreshTypeScript = require("react-refresh-typescript");
-const ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
-const CrxLoadScriptWebpackPlugin = require("@cooby/crx-load-script-webpack-plugin");
-
-const isDev = process.env.NODE !== "production";
 
 const getHtmlPlugins = (chunks) => {
   return chunks.map(
@@ -41,31 +36,12 @@ module.exports = {
   module: {
     rules: [
       {
-        use: {
-          loader: "ts-loader",
-          options: {
-            transpileOnly: isDev,
-            getCustomTransformers: () => ({
-              before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
-            }),
-          },
-        },
-        test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
-      },
-      {
-        use: ["style-loader", "css-loader", "postcss-loader"],
-        test: /\.css$/i,
-      },
-      {
         test: /\.(png|jpg|jpeg|gif|woff|woff2|tff|eot|svg)$/i,
         type: "asset/inline",
       },
     ],
   },
   plugins: [
-    isDev && new ReactRefreshPlugin({ overlay: false }),
-    isDev && new CrxLoadScriptWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         { from: path.resolve("src/static"), to: path.resolve("dist") },
@@ -76,5 +52,5 @@ module.exports = {
       ],
     }),
     ...getHtmlPlugins(["popup"]),
-  ].filter(Boolean),
+  ],
 };
