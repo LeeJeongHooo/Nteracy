@@ -1,12 +1,17 @@
 import { createRoot } from "react-dom/client";
 import { waitForElement } from "@utils/waitForElement";
-import "@assets/styles/main.css";
+import styles from "@assets/styles/main.css";
 import App from "./App";
 
 __webpack_public_path__ = chrome.runtime.getURL("");
 
 const appId = "nteracy";
 const selector = "#secondary.style-scope.ytd-watch-flexy";
+
+const renderApp = (element: Element | DocumentFragment) => {
+  const root = createRoot(element);
+  root.render(<App />);
+};
 
 const init = async () => {
   const appContainer = document.createElement("div");
@@ -23,9 +28,16 @@ const init = async () => {
     element.insertAdjacentElement("afterbegin", appContainer);
   }
 
-  const root = createRoot(appContainer);
+  if (process.env.NODE_ENV === "production") {
+    const shadowDOM = appContainer.attachShadow({ mode: "open" });
+    const styleTag = document.createElement("style");
+    styleTag.textContent = `${styles}`;
+    shadowDOM.appendChild(styleTag);
+    renderApp(shadowDOM);
+  } else {
+    renderApp(appContainer);
+  }
 
-  root.render(<App />);
   isInitialize = false;
 };
 
