@@ -17,7 +17,7 @@ export const AccordionContent = forwardRef<
       role="region"
       aria-labelledby={triggerId}
       className={cn(
-        "transition-all duration-300",
+        "overflow-hidden transition-all duration-300",
         open ? "opacity-100 max-h-[1024px]" : "max-h-0 opacity-0"
       )}
       {...props}
