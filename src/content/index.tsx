@@ -48,10 +48,13 @@ if (location.pathname === "/watch" && !isInitialize) {
   init();
 }
 
-window.addEventListener("yt-navigate-finish", () => {
-  console.log("navigate-finish");
-  if (location.pathname === "/watch" && !isInitialize) {
-    isInitialize = true;
-    init();
-  }
-});
+window.addEventListener(
+  "yt-navigate-finish",
+  () => {
+    if (location.pathname === "/watch" && !isInitialize) {
+      isInitialize = true;
+      init();
+    }
+  },
+  { once: true }
+);
