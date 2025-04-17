@@ -1,6 +1,10 @@
-export const getSearchParams = () => {
+export const getSearchParams = (query: string) => {
   const params = new URLSearchParams(window.location.search);
-  const v = params.get("v");
+  const searchParams = params.get(query);
 
-  return v;
+  if (!searchParams) {
+    new Error("Not Found SearchParams");
+  }
+
+  return searchParams;
 };
