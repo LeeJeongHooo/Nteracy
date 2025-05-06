@@ -1,4 +1,4 @@
-import { AccountStatus, BackgroundRequest } from "./constant";
+import { AccountStatus, BackgroundRequest } from "./const";
 
 if (module.hot) {
   require("@cooby/crx-load-script-webpack-plugin/lib/loadScript");
@@ -18,8 +18,20 @@ if (process.env.NODE_ENV === "development") {
     ) {
       chrome.scripting.executeScript({
         target: { tabId: tabId },
-        files: ["content.js"], // DevServer의 최신 번들 경로
+        files: ["content.js"],
       });
     }
   });
 }
+
+chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
+  if (request === BackgroundRequest.OAUTH) {
+    chrome.identity.getProfileUserInfo(
+      { accountStatus: AccountStatus.SYNC },
+      (userInfo) => {
+        sendResponse(userInfo);
+      }
+    );
+    return true;
+  }
+});
