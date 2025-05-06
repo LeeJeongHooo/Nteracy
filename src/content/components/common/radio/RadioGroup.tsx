@@ -35,7 +35,7 @@ const RadioGroupRoot = forwardRef<HTMLDivElement, RadioGroupProps>(
     const isControlled = valueProp !== undefined;
 
     const value = isControlled ? valueProp : uncontrolledValue;
-
+    console.log(isControlled);
     const handleChangeValue: React.Dispatch<React.SetStateAction<string>> =
       useCallback(
         (nextValue) => {
