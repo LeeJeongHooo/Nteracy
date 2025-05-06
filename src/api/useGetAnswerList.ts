@@ -5,7 +5,7 @@ interface Params {
   userId: string;
 }
 
-interface AnswerRes {
+export interface AnswerRes {
   id: number;
   userId: string;
   videokey: string;
